@@ -2,7 +2,7 @@
 
 - **Name**: Abdulbaki Suraj
 - **Slack username**: InfraNomad
-- **Server IP**:
+- **Server IP**: [44.223.4.107](http://44.223.4.107/)
 
 ## Project Description
 
