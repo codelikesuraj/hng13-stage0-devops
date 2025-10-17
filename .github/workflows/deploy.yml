@@ -39,7 +39,7 @@ jobs:
       - name: Deploy only updated files
         run: |
           echo "Listing changed files..."
-          CHANGED_FIELS=$(git diff --name-only HEAD^ HEAD)
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
 
           if [ -z "$CHANGED_FILES" ]; then
             echo "No changes detected, skipping deployment."
