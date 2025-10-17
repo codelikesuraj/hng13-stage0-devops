@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout latest code
         uses: actions/checkout@v5
-        with:
-          fetch-depth: 2
 
       - name: Setup SSH key
         run: |
