@@ -34,14 +34,21 @@ jobs:
             sudo systemctl status nginx --no-pager
           EOF
 
-      - name: Deploy index.html
+      - name: Deploy only updated files
         run: |
-          echo "Uploading index.html..."
-          scp -o StrictHostKeyChecking=no index.html ubuntu@${{ secrets.SERVER_IP }}:/tmp/index.html
+          echo "Listing changed files..."
+          CHANGED_FIELS=$(git diff --name-only HEAD^ HEAD)
 
-          echo "Moving file into web directory..."
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} << 'EOF'
-            sudo mv /tmp/index.html /var/www/html/index.html
-            sudo chmod 644 /var/www/html/index.html
-            sudo nginx -t && sudo systemctl reload nginx
-          EOF
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No changes detected, skipping deployment."
+            exit 0
+          fi
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          echo "Transferring updatd files..."
+          tar -czf - $CHANGED)FILES | ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} "sudo tar -xzf - -C /var/www/html/"
+
+          echo "Reloading NGINX..."
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} "sudo nginx -t && sudo systemctl reload nginx"
