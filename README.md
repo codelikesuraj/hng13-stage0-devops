@@ -20,5 +20,6 @@ The goal is to
 - NGINX - web server
 - Github Actions - CI/CD automation
 - Linux (Ubuntu) - deployment environment
+- Ansible - server provisioning
 - Git & SSH - version control and secure access
 - HTML - static web content
