@@ -17,9 +17,15 @@ The goal is to
 - configure a CI/CD pipeline with Github Actions to automate deployment
 
 ### Tech Stack
+- AWS - Cloud service provider
 - NGINX - web server
 - Github Actions - CI/CD automation
 - Linux (Ubuntu) - deployment environment
-- Ansible - server provisioning
 - Git & SSH - version control and secure access
 - HTML - static web content
+
+## Setup
+- on AWS, setup an EC2 instance with an Ubuntu AMI
+- copy the ssh key used during setup as well as public ipv4 address generated after the instace was created
+- add these values to the Github repo secrets (Settings -> Secrets and variables -> Actions -> New repository secrets)
+- manually run the Github Action to test it (this also run automatically for every push to the repo)
