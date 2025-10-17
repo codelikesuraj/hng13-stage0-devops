@@ -35,18 +35,7 @@ jobs:
 
       - name: Deploy only updated files
         run: |
-          echo "Listing changed files..."
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
-
-          if [ -z "$CHANGED_FILES" ]; then
-            echo "No changes detected, skipping deployment."
-            exit 0
-          fi
-
-          echo "Changed files:"
-          echo "$CHANGED_FILES"
-
-          echo "Transferring updated files..."
+          echo "Copying files..."
           tar -czf - $CHANGED_FILES | \
             ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} \
             "sudo mkdir -p /var/www/html && sudo tar -xzf - -C /var/www/html/"
